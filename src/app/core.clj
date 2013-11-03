@@ -1,11 +1,13 @@
 (ns app.core
-  (:require [liberator.core :refer [resource defresource]]
-            [ring.adapter.jetty :refer [run-jetty]]
-            [compojure.core :refer [defroutes ANY]]))
+  (:require [ring.adapter.jetty :refer [run-jetty]]
+            [compojure.core :refer [defroutes GET]]))
 
 (defn ok-status [] "200")
+(defn not-found-error [] "404")
 
 (defroutes app
-  (ANY "/" [] (ok-status)))
+  (GET "/" [] (ok-status))
+  (GET "/user/:id" [id] (str "Hello user: " id))
+  (GET "/unknown" [] (not-found-error)))
 
 (run-jetty #'app {:port 3000})
