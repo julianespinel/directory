@@ -1,5 +1,6 @@
 (ns directory.handler
-  (:use compojure.core)
+  (:use compojure.core
+        ring.middleware.json)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [directory.mongomanager :as momanager]))
@@ -13,14 +14,16 @@
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
-  
+
   (GET "/" [] (ok-status))
   (GET "/user/:id" [id] (get-user-message id))
-  (POST "/user" request (println request))
+  (POST "/users" { body :body } (println body))
   (GET "/unknown" [] (not-found-error))
 
   (route/resources "/")
   (route/not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (-> (handler/api app-routes)
+      (wrap-json-body)
+      (wrap-json-response)))
