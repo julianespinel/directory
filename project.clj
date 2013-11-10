@@ -6,7 +6,8 @@
                  [compojure "1.1.6"]
                  [com.novemberain/monger "1.6.0"]]
   :plugins [[lein-ring "0.8.8"]]
-  :ring {:handler directory.handler/app}
+  :ring {:handler directory.handler/app
+         :auto-reload? true}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring-mock "0.1.5"]]}})
