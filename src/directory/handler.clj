@@ -1,23 +1,25 @@
 (ns directory.handler
   (:use compojure.core
         ring.middleware.json)
-  (:require [compojure.handler :as handler]
+  (:require [ring.util.response :as resp]
+            [compojure.handler :as handler]
             [compojure.route :as route]
             [directory.mongomanager :as momanager]))
 
 (defn ok-status [] "200")
-(defn get-user-message [id] (str "Hello user: " id))
+(defn get-service [id] (str "Hello service: " id))
 (defn not-found-error [] "404")
 
-(defn register-user [user]
-  (momanager/register-user user))
+(defn register-service [service]
+  (momanager/register-service service))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] (resp/redirect "/redirect-url"))
+  (GET "/redirect-url" [] "Hello you have been redirected.")
 
-  (GET "/" [] (ok-status))
-  (GET "/user/:id" [id] (get-user-message id))
-  (POST "/users" { body :body } (println body))
+  (GET "/services" [] (momanager/get-all-services))
+  (GET "/services/:id" [id] (get-service id))
+  (POST "/services" { body :body } (register-service body))
   (GET "/unknown" [] (not-found-error))
 
   (route/resources "/")

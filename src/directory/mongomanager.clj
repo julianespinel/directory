@@ -5,6 +5,8 @@
 (monger/connect! { :host "localhost" })
 (monger/set-db! (monger/get-db "directorydb"))
 
-(defn register-user [user]
-  (println "*********** hello from clojure: " user)
-  (mc/insert "services" user))
+(defn register-service [user]
+  (mc/insert-and-return "services" user))
+
+(defn get-all-services []
+  (println (mc/find-maps "services")))
