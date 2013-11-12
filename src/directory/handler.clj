@@ -4,10 +4,10 @@
   (:require [ring.util.response :as resp]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [directory.mongomanager :as momanager]))
+            [directory.mongomanager :as momanager]
+            [directory.translator :as translator]))
 
 (defn ok-status [] "200")
-(defn get-service [id] (str "Hello service: " id))
 (defn not-found-error [] "404")
 
 (defn register-service [service]
@@ -16,10 +16,11 @@
 (defroutes app-routes
   (GET "/" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
-
+  
+  (POST "/services" { body :body } (register-service (translator/get-microservice-from-map body)))
   (GET "/services" [] (momanager/get-all-services))
-  (GET "/services/:id" [id] (get-service id))
-  (POST "/services" { body :body } (register-service body))
+  (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
+  
   (GET "/unknown" [] (not-found-error))
 
   (route/resources "/")
