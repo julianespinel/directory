@@ -7,7 +7,7 @@
             [directory.mongomanager :as momanager]
             [directory.translator :as translator]))
 
-(defn ok-status [] "200")
+(def ok-status "200")
 (defn not-found-error [] "404")
 
 (defn register-service [service]
@@ -20,6 +20,10 @@
   (POST "/services" { body :body } (register-service (translator/get-microservice-from-map body)))
   (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
+  (PUT "/services/:service-name" { params :params, body :body } 
+       (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
+         (momanager/update-service-by-name service-name service))
+       ok-status) ; TODO: check if the update operation result was OK, if true, then return 200, else return 500.
   
   (GET "/unknown" [] (not-found-error))
 
