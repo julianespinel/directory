@@ -13,6 +13,9 @@
 (defn register-service [service]
   (momanager/register-service service))
 
+(defn handle-mongo-write-result [write-result]
+  (if (not (= (:err write-result) nil)) "error" "ok"))
+
 (defroutes app-routes
   (GET "/" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
@@ -20,10 +23,12 @@
   (POST "/services" { body :body } (register-service (translator/get-microservice-from-map body)))
   (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
-  (PUT "/services/:service-name" { params :params, body :body } 
-       (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
-         (momanager/update-service-by-name service-name service))
-       ok-status) ; TODO: check if the update operation result was OK, if true, then return 200, else return 500.
+  (PUT "/services/:service-name" { params :params, body :body }
+       (def service-name (:service-name params))
+       (def service (translator/get-microservice-from-map body))
+       (handle-mongo-write-result (momanager/update-service-by-name service-name service)))
+  (DELETE "/services/:service-name" [service-name] 
+          (handle-mongo-write-result (momanager/delete-service-by-name service-name)))
   
   (GET "/unknown" [] (not-found-error))
 

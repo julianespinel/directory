@@ -17,4 +17,7 @@
   (mc/find-maps "services" { :service-name service-name }))
 
 (defn update-service-by-name [service-name service]
-  (mc/update "services" { :service-name service-name } service :upsert false))
+  (mc/update "services" { :service-name service-name } service))
+
+(defn delete-service-by-name [service-name]
+  (mc/remove "services" { :service-name service-name }))
