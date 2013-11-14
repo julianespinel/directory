@@ -23,10 +23,11 @@
   (POST "/services" { body :body } (register-service (translator/get-microservice-from-map body)))
   (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
-  (PUT "/services/:service-name" { params :params, body :body }
-       (def service-name (:service-name params))
-       (def service (translator/get-microservice-from-map body))
-       (handle-mongo-write-result (momanager/update-service-by-name service-name service)))
+
+  (PUT "/services/:service-name" { params :params, body :body } 
+       (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
+         (handle-mongo-write-result (momanager/update-service-by-name service-name service))))
+
   (DELETE "/services/:service-name" [service-name] 
           (handle-mongo-write-result (momanager/delete-service-by-name service-name)))
   
