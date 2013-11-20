@@ -13,14 +13,21 @@
 
 (defn register-service
   "Register a new service"
-  [service] (momanager/register-service service))
+  [generic-map] (let [micro-service (translator/get-microservice-from-map generic-map) 
+                      create-result (momanager/register-service micro-service)] 
+                  (if (empty? create-result) { :status 201 } { :status 500 })))
+
+(defn body-is-null
+  "Checks that the parameter is not a null or empty map"
+  [body] (empty? body))
 
 (defroutes app-routes
   "Define the application routes"
   (GET "/" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
   
-  (POST "/services" { body :body } (register-service (translator/get-microservice-from-map body)))
+  ; Http status code 400: bad request
+  (POST "/services" { body :body } (if (not (body-is-null body)) (register-service body) { :status 400 }))
   (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
 

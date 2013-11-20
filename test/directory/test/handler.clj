@@ -16,7 +16,7 @@
 
   (testing "Register service no payload"
     (let [response (app (request :post "/services"))]
-      (is (= (:status response) 400)))) ; The body payload is missing.
+      (is (= (:status response) 400)))) ; Bad request, the body payload is missing.
   
   (testing "not-found route"
     (let [response (app (request :get "/invalid"))]
