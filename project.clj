@@ -9,5 +9,7 @@
   :ring {:handler directory.handler/app
          :auto-reload? true}
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}})
+  {:dev {:plugins [[lein-midje "3.1.1"]]
+         :dependencies [[javax.servlet/servlet-api "2.5"]
+                        [ring-mock "0.1.5"]
+                        [midje "1.6.0"]]}})

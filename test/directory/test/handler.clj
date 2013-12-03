@@ -1,23 +1,26 @@
 (ns directory.test.handler
   (:use clojure.test
         ring.mock.request  
-        directory.handler))
+        directory.handler
+        midje.sweet)
+  (:require directory.mongomanager))
 
-(deftest test-app
-  (testing "Index"
-    (let [response (app (request :get "/"))]
-      (is (= (:status response) 302)) ; Redirect to /redirect-url
-      (is (= (:body response) ""))))
+(def redirection-message "Hello you have been redirected.")
 
-  (testing "Redirect url"
-    (let [response (app (request :get "/redirect-url"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "Hello you have been redirected."))))
+(facts "About the main app routes"
 
-  (testing "Register service no payload"
-    (let [response (app (request :post "/services"))]
-      (is (= (:status response) 400)))) ; Bad request, the body payload is missing.
-  
-  (testing "not-found route"
-    (let [response (app (request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+       (fact "Get to / redirects to /redirect-url"
+             (app-routes {:uri "/" :request-method :get}) 
+             => (contains {:status 302 :headers {"Location" "/redirect-url"}}))
+
+       (fact (str "Get to /redirect-url returns " redirection-message)
+             (app-routes {:uri "/redirect-url" :request-method :get})
+             => (contains {:status 200 :body redirection-message}))
+
+       (fact "Register a new service with no POST payload returns 400"
+             (app-routes {:uri "/services" :request-method :post})
+             => (contains {:status 400}))
+
+       (fact "Get to a not valid route returns 404"
+             (app-routes {:uri "/not-valid" :request-method :get})
+             => (contains {:status 404})))
