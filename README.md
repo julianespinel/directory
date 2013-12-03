@@ -11,9 +11,15 @@ You will need [Leiningen][1] 1.7.0 or above installed.
 
 ## Running
 
-To start a web server for the application, run:
+To start the application, execute in a terminal:
 
     lein ring server-headless
+
+## Testing
+
+To run tests, exeute in a terminal:
+
+    lein midje
 
 ## License
 
