@@ -12,4 +12,5 @@
   {:dev {:plugins [[lein-midje "3.1.1"]]
          :dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring-mock "0.1.5"]
-                        [midje "1.6.0"]]}})
+                        [midje "1.6.0"]
+                        [cheshire "5.2.0"]]}})

@@ -15,7 +15,7 @@
   "Register a new service"
   [generic-map] (let [micro-service (translator/get-microservice-from-map generic-map) 
                       create-result (momanager/register-service micro-service)] 
-                  (if (empty? create-result) { :status 201 } { :status 500 })))
+                  (if (not (empty? create-result)) { :status 201 } { :status 500 })))
 
 (defn body-is-null
   "Checks that the parameter is not a null or empty map"
