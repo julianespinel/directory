@@ -9,7 +9,7 @@
             [directory.translator :as translator]))
 
 (def ok-status "200")
-(defn not-found-error [] "404")
+(def not-found-error "404")
 
 (defn register-service
   "Register a new service"
@@ -37,11 +37,9 @@
 
   (DELETE "/services/:service-name" [service-name] 
           (momanager/delete-service-by-name service-name))
-  
-  (GET "/unknown" [] (not-found-error))
 
   (route/resources "/")
-  (route/not-found "Not Found"))
+  (route/not-found not-found-error))
 
 (def app
   (-> (handler/api app-routes)
