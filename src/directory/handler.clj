@@ -31,9 +31,11 @@
   (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
 
-  (PUT "/services/:service-name" { params :params, body :body } 
+  (PUT "/services/:service-name" { params :params, body :body }
+       (if (not (body-is-null body))
        (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
-         (momanager/update-service-by-name service-name service)))
+         (momanager/update-service-by-name service-name service))
+       { :status 500 }))
 
   (DELETE "/services/:service-name" [service-name] 
           (momanager/delete-service-by-name service-name))
