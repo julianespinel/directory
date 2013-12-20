@@ -4,10 +4,10 @@
   (:import [directory.microservice Microservice]))
 
 (defn get-microservice-from-map 
-  "Gets a regular map and return a Microservice." 
-  [generic-map] (Microservice. 
-                  (get generic-map "service-name")
-                  (get generic-map "host")
-                  (get generic-map "port")
-                  (get generic-map "protocol")
-                  (get generic-map "prefix")))
+  "Gets a string map and return a Microservice. It should be a string map, not a key map." 
+  [string-map] (Microservice. 
+                  (get string-map "service-name")
+                  (get string-map "host")
+                  (get string-map "port")
+                  (get string-map "protocol")
+                  (get string-map "prefix")))
