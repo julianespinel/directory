@@ -6,7 +6,15 @@
             [monger.json]))
 
 (monger/connect! { :host "localhost" })
-(monger/set-db! (monger/get-db "directorydb"))
+(monger/use-db! "directorydb")
+
+(defn get-current-db-name
+  "Returns the name of the database it is using now."
+    [] (.getName (monger/current-db))) ; Call the getName() method from the underlying java mongo driver.
+
+(defn change-default-db
+  "Changes the default db: directorydb, for the database with the name given as argument."
+  [db-name] (if-not (clojure.string/blank? db-name) (monger/use-db! db-name)))
 
 (defn handle-write-result
   "Replaces the default mongodb write result for a more meaningful answer."
