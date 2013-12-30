@@ -1,6 +1,5 @@
 (ns directory.mongomanager
   "This module is responsible of providing the functions needed to communicate with mongodb."
-  (:use [clojure.string :only (split)])
   (:require [monger.core :as monger]
             [monger.collection :as mc] 
             [monger.json]))
@@ -16,10 +15,6 @@
   "Changes the default db: directorydb, for the database with the name given as argument."
   [db-name] (if-not (clojure.string/blank? db-name) (monger/use-db! db-name)))
 
-(defn handle-write-result
-  "Replaces the default mongodb write result for a more meaningful answer."
-  [write-result] (if (not (= (:err write-result) nil)) "error" "ok"))
-
 (defn register-service 
   "Register a new service into mongo." 
   [service] (mc/insert-and-return "services" service))
@@ -31,6 +26,10 @@
 (defn get-service-by-name 
   "Return a service with the given name."
   [service-name] (mc/find-maps "services" { :service-name service-name }))
+
+(defn handle-write-result
+  "Replaces the default mongodb write result for a more meaningful answer."
+  [write-result] (if (not (= (:err write-result) nil)) "error" "ok"))
 
 (defn update-service-by-name 
   "Replaces the service with the given name, for the second argument (a microservice)."
