@@ -21,9 +21,10 @@
   "Checks that the parameter is not a null or empty map"
   [body] (empty? body))
 
-(defroutes app-routes
+(defroutes api-routes
   "Define the application routes"
-  (GET "/" [] (resp/redirect "/redirect-url"))
+  (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
+  (GET "/redirect" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
   
   ; Http status code 400: bad request
@@ -39,11 +40,11 @@
 
   (DELETE "/services/:service-name" [service-name] 
           (momanager/delete-service-by-name service-name))
-
+  
   (route/resources "/")
   (route/not-found not-found-error))
 
 (def app
-  (-> (handler/api app-routes)
+  (-> (handler/api api-routes)
       (wrap-json-body)
       (wrap-json-response)))

@@ -1,0 +1,8 @@
+{
+  "name": "Directory",
+
+  "devDependencies": {
+
+      "angular" : "1.2.6"
+  }
+}

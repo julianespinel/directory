@@ -7,7 +7,9 @@
                  [com.novemberain/monger "1.6.0"]]
   :plugins [[lein-ring "0.8.8"]]
   :ring {:handler directory.handler/app
-         :auto-reload? true}
+         :stacktraces? true
+         :auto-reload true
+         :auto-refresh? true}
   :profiles
   {:dev {:plugins [[lein-midje "3.1.1"]]
          :dependencies [[javax.servlet/servlet-api "2.5"]
