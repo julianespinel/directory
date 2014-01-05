@@ -13,7 +13,7 @@ You will need [Leiningen][1] 1.7.0 or above installed.
 
 To start the application, execute in a terminal:
 
-    lein ring server-headless
+    lein ring server
 
 ## Testing
 

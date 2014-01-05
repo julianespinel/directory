@@ -27,9 +27,9 @@
   (GET "/redirect" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
   
+  (GET "/services" [] (momanager/get-all-services))
   ; Http status code 400: bad request
   (POST "/services" { body :body } (if (not (body-is-null body)) (register-service body) { :status 400 }))
-  (GET "/services" [] (momanager/get-all-services))
   (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
 
   (PUT "/services/:service-name" { params :params, body :body }

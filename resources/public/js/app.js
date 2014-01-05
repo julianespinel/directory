@@ -6,18 +6,33 @@ var directoryApp = angular.module('directoryApp', ['ngRoute']);
 
 directoryApp.config(['$routeProvider', function($routeProvider) {
 
-    $routeProvider.when('/directory', {
+    $routeProvider.when('/', {
 
-        templateUrl: 'js/modules/microservice/partials/show-microservices.html'
-      }).
+        redirectTo: '/directory'
+    })
 
-      when('/404', {
+    .when('/directory', {
 
-        templateUrl: 'js/modules/infrastructure/partials/404-template.html'
-      }).
+        templateUrl: 'js/modules/infrastructure/partials/index.html'
+    }).
+    
+    when('/directory/microservices', {
 
-      otherwise({
+        templateUrl: 'js/modules/microservice/partials/microservices.html'
+    }).
+
+    when('/directory/microservices/:serviceName', {
+
+        templateUrl: 'js/modules/microservice/partials/microservice-detail.html'
+    }).
+
+    when('/404', {
+
+        templateUrl: 'js/modules/infrastructure/partials/404-error.html'
+    }).
+
+    otherwise({
 
         redirectTo: '/404'
-      });
-  }]);
+    });
+}]);
