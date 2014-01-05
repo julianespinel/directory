@@ -14,4 +14,4 @@ pom.xml
 
 # JS
 
-/bower_components
+**/bower_components
