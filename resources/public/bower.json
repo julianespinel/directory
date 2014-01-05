@@ -3,6 +3,7 @@
 
   "devDependencies": {
 
-      "angular" : "1.2.6"
+      "angular" : "latest",
+      "angular-route" : "latest"
   }
 }
