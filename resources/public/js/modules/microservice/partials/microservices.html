@@ -1,1 +1,21 @@
-Hello from microservices partial.
+<section class="partial">
+
+    <div class="title">
+        Registered microservices
+    </div>
+
+    <div class="content">
+
+        <ul class="list">
+            <li class="list-item" ng-repeat="service in servicesList">
+                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.service-name }}</a>
+                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.host }}</a>
+                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.port }}</a>
+                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.protocol }}</a>
+                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.prefix }}</a>
+            </li>
+        </ul>
+
+    </div>
+
+</section>

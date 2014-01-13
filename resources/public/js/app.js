@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var directoryApp = angular.module('directoryApp', ['ngRoute']);
+var directoryApp = angular.module('directoryApp', ['ngRoute', 'microservicesServices', 'microservicesControllers']);
 
 directoryApp.config(['$routeProvider', function($routeProvider) {
 
@@ -18,6 +18,7 @@ directoryApp.config(['$routeProvider', function($routeProvider) {
     
     when('/directory/microservices', {
 
+        controller: 'microservicesListController',
         templateUrl: 'js/modules/microservice/partials/microservices.html'
     }).
 
