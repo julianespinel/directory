@@ -5,12 +5,15 @@ microservicesServices.factory('Microservice', ['$resource', function($resource) 
     var specificMicroserviceUrl = 'http://localhost:3000/services/:serviceName';
     var microservicesUrl = 'http://localhost:3000/services';
 
+    var url = '';
     var paramDefaults = '';
 
     var actions = {
 
         getSpecificMicroservice: { method: 'GET', url: specificMicroserviceUrl },
-        createMicroservice: { method: 'POST', url: microservicesUrl }
+        createMicroservice: { method: 'POST', url: microservicesUrl },
+        editMicroservice: { method: 'PUT', url: specificMicroserviceUrl },
+        deleteMicroservice: { method: 'DELETE', url: specificMicroserviceUrl }
     };
 
     return $resource(url, paramDefaults, actions);
@@ -23,8 +26,7 @@ microservicesServices.factory('MicroservicesList', ['$resource', function($resou
     
     var actions = {
 
-        getAllMicroservices: { method: 'GET' },
-        isArray: true
+        getAllMicroservices: { method: 'GET', isArray: true }
     };
 
     return $resource(url, paramDefaults, actions);

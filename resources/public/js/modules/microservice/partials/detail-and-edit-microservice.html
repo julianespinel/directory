@@ -1,6 +1,6 @@
 <form class="regular">
     <label class="regular" for="serviceName">Service name</label>
-    <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" value="{{ service.serviceName }}" required />
+    <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" value="{{ service.serviceName }}" disabled />
 
     <label class="regular" for="host">Host</label>
     <input class="regular" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
@@ -14,5 +14,5 @@
     <label class="regular" for="prefix">Prefix</label>
     <input class="regular" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
 
-    <input class="regular" type="submit" value="Create" ng-click="createMicroservice()" required />
+    <input class="regular" type="submit" value="Edit" ng-click="editMicroservice()" required />
 </form>

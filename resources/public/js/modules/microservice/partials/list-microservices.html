@@ -4,17 +4,70 @@
         Registered microservices
     </div>
 
-    <div class="content">
+    <div class="container">
 
-        <ul class="list">
-            <li class="list-item" ng-repeat="service in servicesList">
-                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.serviceName }}</a>
-                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.host }}</a>
-                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.port }}</a>
-                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.protocol }}</a>
-                <a href="#/directory/microservices/{{ service.service-name }}">{{ service.prefix }}</a>
-            </li>
-        </ul>
+        <div class="horizontal-div">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service name</th>
+                        <th>Host</th>
+                        <th>Port</th>
+                        <th>Protocol</th>
+                        <th>Prefix</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="service in servicesList">
+                    <td>
+                        <a href="#/directory/microservices/{{ service.serviceName }}">{{ service.serviceName }}</a>
+                    </td>
+
+                    <td>
+                        <a href="#/directory/microservices/{{ service.serviceName }}">{{ service.host }}</a>
+                    </td>
+
+                    <td>
+                        <a href="#/directory/microservices/{{ service.serviceName }}">{{ service.port }}</a>
+                    </td>
+
+                    <td>
+                        <a href="#/directory/microservices/{{ service.serviceName }}">{{ service.protocol }}</a>
+                    </td>
+
+                    <td>
+                        <a href="#/directory/microservices/{{ service.serviceName }}">{{ service.prefix }}</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="horizontal-div">
+
+            <form class="regular">
+                <label class="regular" for="serviceName">Service name</label>
+                <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" value="{{ service.serviceName }}" required />
+
+                <label class="regular" for="host">Host</label>
+                <input class="regular" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
+
+                <label class="regular" for="port">Port</label>
+                <input class="regular" id="port" type="text" ng-model="service.port" value="{{ service.port }}" required />
+
+                <label class="regular" for="protocol">Protocol</label>
+                <input class="regular" id="protocol" type="text" ng-model="service.protocol" value="{{ service.protocol }}" required />
+
+                <label class="regular" for="prefix">Prefix</label>
+                <input class="regular" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+
+                <input class="regular" type="submit" value="Create" ng-click="createMicroservice()" required />
+            </form>
+
+        </div>
 
     </div>
 
