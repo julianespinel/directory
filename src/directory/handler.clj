@@ -30,16 +30,16 @@
   (GET "/services" [] (momanager/get-all-services))
   ; Http status code 400: bad request
   (POST "/services" { body :body } (if (not (body-is-null body)) (register-service body) { :status 400 }))
-  (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
+  (GET "/services/:serviceName" [serviceName] (momanager/get-service-by-name serviceName))
 
-  (PUT "/services/:service-name" { params :params, body :body }
+  (PUT "/services/:serviceName" { params :params, body :body }
        (if (not (body-is-null body))
-       (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
-         (momanager/update-service-by-name service-name service))
+       (let [serviceName (:serviceName params) service (translator/get-microservice-from-map body)] 
+         (momanager/update-service-by-name serviceName service))
        { :status 500 }))
 
-  (DELETE "/services/:service-name" [service-name] 
-          (momanager/delete-service-by-name service-name))
+  (DELETE "/services/:serviceName" [serviceName] 
+          (momanager/delete-service-by-name serviceName))
   
   (route/resources "/")
   (route/not-found not-found-error))

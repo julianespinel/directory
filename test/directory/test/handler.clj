@@ -10,7 +10,7 @@
 
 (def redirection-message "Hello you have been redirected.")
 
-(def json-service "{\"service-name\": \"service1\", \"host\": \"host1\", \"port\": \"port1\", 
+(def json-service "{\"serviceName\": \"service1\", \"host\": \"host1\", \"port\": \"port1\", 
                   \"protocol\": \"protocol1\", \"prefix\": \"prefix1\"}")
 
 (defn translate-from-json-to-map [json-string] (parse-string json-string))
@@ -44,23 +44,23 @@
              => (contains {:status 200 :body  (list new-microservice)})
              (provided (momanager/get-all-services) => (list new-microservice)))
 
-       (fact "Get to /services/:service-name returns the service with the given name."
-             (api-routes {:uri (str "/services/" (:service-name new-microservice)) :request-method :get})
+       (fact "Get to /services/:serviceName returns the service with the given name."
+             (api-routes {:uri (str "/services/" (:serviceName new-microservice)) :request-method :get})
              => (contains {:status 200 :body (list new-microservice)})
              (provided (momanager/get-service-by-name "service1") => (list new-microservice)))
 
-       (fact "Put to /services/:service-name with no body payload, returns 500."
-             (api-routes {:uri (str "/services/" (:service-name new-microservice)) 
+       (fact "Put to /services/:serviceName with no body payload, returns 500."
+             (api-routes {:uri (str "/services/" (:serviceName new-microservice)) 
                           :request-method :put}) => (contains {:status 500}))
 
-       (fact "Put to /services/:service-name returns the result of the update operation."
-             (api-routes {:uri (str "/services/" (:service-name new-microservice)) :request-method :put
+       (fact "Put to /services/:serviceName returns the result of the update operation."
+             (api-routes {:uri (str "/services/" (:serviceName new-microservice)) :request-method :put
                           :body (translate-from-json-to-map json-service)})
              => (contains {:status 200 :body "ok"})
              (provided (momanager/update-service-by-name "service1" new-microservice) => "ok"))
 
-       (fact "Delete to /services/:service-name returns the result of the delete operation."
-             (api-routes {:uri (str "/services/" (:service-name new-microservice)) :request-method :delete})
+       (fact "Delete to /services/:serviceName returns the result of the delete operation."
+             (api-routes {:uri (str "/services/" (:serviceName new-microservice)) :request-method :delete})
              => (contains {:status 200 :body "ok"})
              (provided (momanager/delete-service-by-name "service1") => "ok"))
 

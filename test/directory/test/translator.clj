@@ -7,7 +7,7 @@
   (:require [directory.translator :as translator])
   (:import [directory.microservice Microservice]))
 
-(def string-map {"service-name" "service1", "host" "host1", "port" "port1", "protocol" "protocol1", "prefix" "prefix1"})
+(def string-map {"serviceName" "service1", "host" "host1", "port" "port1", "protocol" "protocol1", "prefix" "prefix1"})
 
 (facts "About the translator functions"
        

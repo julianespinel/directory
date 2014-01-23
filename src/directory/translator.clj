@@ -6,7 +6,7 @@
 (defn get-microservice-from-map 
   "Gets a string map and return a Microservice. It should be a string map, not a key map." 
   [string-map] (Microservice. 
-                  (get string-map "service-name")
+                  (get string-map "serviceName")
                   (get string-map "host")
                   (get string-map "port")
                   (get string-map "protocol")
