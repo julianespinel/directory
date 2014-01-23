@@ -1,0 +1,18 @@
+<form class="regular">
+    <label class="regular" for="serviceName">Service name</label>
+    <input class="regular" id="serviceName" type="text" value="{{ service.serviceName }}"/>
+
+    <label class="regular" for="host">Host</label>
+    <input class="regular" id="host" type="text" value="{{ service.host }}"/>
+
+    <label class="regular" for="port">Port</label>
+    <input class="regular" id="port" type="text" value="{{ service.port }}"/>
+
+    <label class="regular" for="protocol">Protocol</label>
+    <input class="regular" id="protocol" type="text" value="{{ service.protocol }}"/>
+
+    <label class="regular" for="prefix">Prefix</label>
+    <input class="regular" id="prefix" type="text" value="{{ service.prefix }}"/>
+
+    <input class="regular" type="submit" value="Create" ng-click="createMicroservice()" />
+</form>

@@ -2,9 +2,17 @@ var microservicesServices = angular.module('microservicesServices', ['ngResource
 
 microservicesServices.factory('Microservice', ['$resource', function($resource) {
 
-    var url = 'http://localhost:3000/services/:serviceName';
+    var specificMicroserviceUrl = 'http://localhost:3000/services/:serviceName';
+    var microservicesUrl = 'http://localhost:3000/services';
+
     var paramDefaults = '';
-    var actions = '';
+
+    var actions = {
+
+        getSpecificMicroservice: { method: 'GET', url: specificMicroserviceUrl },
+        createMicroservice: { method: 'POST', url: microservicesUrl }
+    };
+
     return $resource(url, paramDefaults, actions);
 }]);
 

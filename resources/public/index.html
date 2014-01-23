@@ -10,14 +10,18 @@
   <ul class="menu">
     <li><a href="#/directory">home</a></li>
     <li><a href="#/directory/microservices">microservices</a></li>
-    <li><a href="#/directory/microservices/qwe">users microservice</a></li>
+    <li><a href="#/directory/microservices/qwe">specific qwe microservice</a></li>
   </ul>
 
   <div ng-view></div>
 
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js">
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+
   <script src="js/app.js"></script>
+  <script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
+  <script src="js/modules/microservice/services/microservicesServices.js"></script>
+
 </body>
 </html>

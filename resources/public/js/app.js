@@ -19,12 +19,13 @@ directoryApp.config(['$routeProvider', function($routeProvider) {
     when('/directory/microservices', {
 
         controller: 'microservicesListController',
-        templateUrl: 'js/modules/microservice/partials/microservices.html'
+        templateUrl: 'js/modules/microservice/partials/list-microservices.html'
     }).
 
     when('/directory/microservices/:serviceName', {
 
-        templateUrl: 'js/modules/microservice/partials/microservice-detail.html'
+        controller: 'microserviceController',
+        templateUrl: 'js/modules/microservice/partials/detail-microservice.html'
     }).
 
     when('/404', {
