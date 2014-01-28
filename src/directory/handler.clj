@@ -6,7 +6,8 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [directory.mongomanager :as momanager]
-            [directory.translator :as translator]))
+            [directory.translator :as translator]
+            [cheshire.core :refer :all]))
 
 (def ok-status "200")
 (def not-found-error "404")
@@ -30,7 +31,7 @@
   (GET "/services" [] (momanager/get-all-services))
   ; Http status code 400: bad request
   (POST "/services" { body :body } (if (not (body-is-null body)) (register-service body) { :status 400 }))
-  (GET "/services/:serviceName" [serviceName] (momanager/get-service-by-name serviceName))
+  (GET "/services/:serviceName" [serviceName] (generate-string (momanager/get-service-by-name serviceName)))
 
   (PUT "/services/:serviceName" { params :params, body :body }
        (if (not (body-is-null body))
