@@ -1,9 +1,10 @@
 var microservicesControllers = angular.module('microservicesControllers', []);
 
-microservicesControllers.controller('microserviceController', ['$scope', 'Microservice', 
-    function($scope, Microservice) {
+microservicesControllers.controller('microserviceController', ['$scope', '$routeParams', 'Microservice', 
+    function($scope, $routeParams, Microservice) {
 
-    $scope.service = '';
+    $scope.service = {};
+    $scope.servicesList = [];
 
     $scope.createMicroservice = function() {
         
@@ -16,6 +17,9 @@ microservicesControllers.controller('microserviceController', ['$scope', 'Micros
             console.debug(microservice);
 
             microservice.$createMicroservice();
+            $scope.servicesList.push(microservice);
+
+            console.debug($scope.servicesList);
 
         } else {
 
@@ -32,9 +36,10 @@ microservicesControllers.controller('microserviceController', ['$scope', 'Micros
 
             var microservice = new Microservice(serviceWithData);
             
+            console.debug($routeParams.serviceName);
             console.debug(microservice);
 
-            microservice.$editMicroservice();
+            microservice.$editMicroservice({ serviceName: $routeParams.serviceName });
 
         } else {
 
@@ -42,6 +47,7 @@ microservicesControllers.controller('microserviceController', ['$scope', 'Micros
             console.error(errorMessage);
         }
     };
+
 }]);
 
 microservicesControllers.controller('microservicesListController', ['$scope', 'MicroservicesList', 
