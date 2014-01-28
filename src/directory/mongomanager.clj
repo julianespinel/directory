@@ -2,7 +2,8 @@
   "This module is responsible of providing the functions needed to communicate with mongodb."
   (:require [monger.core :as monger]
             [monger.collection :as mc] 
-            [monger.json]))
+            [monger.json])
+  (:import [org.bson.types ObjectId]))
 
 (monger/connect! { :host "localhost" })
 (monger/use-db! "directorydb")
