@@ -2,7 +2,8 @@
   "This module is responsible of providing the functions needed to communicate with mongodb."
   (:require [monger.core :as monger]
             [monger.collection :as mc] 
-            [monger.json]))
+            [monger.json])
+  (:import [org.bson.types ObjectId]))
 
 (monger/connect! { :host "localhost" })
 (monger/use-db! "directorydb")
@@ -25,7 +26,7 @@
 
 (defn get-service-by-name 
   "Return a service with the given name."
-  [serviceName] (mc/find-maps "services" { :serviceName serviceName }))
+  [serviceName] (mc/find-one-as-map "services" { :serviceName serviceName }))
 
 (defn handle-write-result
   "Replaces the default mongodb write result for a more meaningful answer."

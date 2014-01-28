@@ -1,10 +1,48 @@
 var microservicesControllers = angular.module('microservicesControllers', []);
 
-microservicesControllers.controller('microserviceController', ['$scope', '$routeParams', 'Microservice', 
-    function($scope, $routeParams, Microservice) {
+microservicesControllers.controller('microserviceController', ['$scope', '$routeParams', 'Microservice', 'MicroservicesList',
+    function($scope, $routeParams, Microservice, MicroservicesList) {
+
+    console.warn($routeParams.serviceName);
 
     $scope.service = {};
-    $scope.servicesList = [];
+    $scope.servicesList = MicroservicesList.getAllMicroservices();
+
+    var getServiceByNameFromList = function(serviceName, servicesList) {
+
+        console.debug('************* 1');
+        console.debug(serviceName);
+        console.debug(servicesList);
+
+        var answer = {};
+        var found = false;
+
+        console.debug('********** 2');
+        console.debug(servicesList.length);
+
+        for (var i = 0; i < servicesList.length && !found; i++) {
+
+            var item = servicesList[i];
+
+            console.debug('in');
+            console.debug(item);
+
+            if (serviceName == item.serviceName) {
+                found = true;
+                answer = item;
+            }
+        }
+
+        return item;
+    };
+
+    if ($routeParams.serviceName) {
+
+        // $scope.service = getServiceByNameFromList($routeParams.serviceName, $scope.servicesList);
+        var microseriveSample = new Microservice();
+        $scope.service = microseriveSample.$getSpecificMicroservice({ serviceName: $routeParams.serviceName });
+        console.debug($scope.service);
+    }
 
     $scope.createMicroservice = function() {
         
@@ -18,6 +56,7 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
 
             microservice.$createMicroservice();
             $scope.servicesList.push(microservice);
+            $scope.service = {};
 
             console.debug($scope.servicesList);
 
@@ -47,11 +86,4 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
             console.error(errorMessage);
         }
     };
-
-}]);
-
-microservicesControllers.controller('microservicesListController', ['$scope', 'MicroservicesList', 
-    function($scope, MicroservicesList) {
-
-    $scope.servicesList = MicroservicesList.getAllMicroservices();
 }]);
