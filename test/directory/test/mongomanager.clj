@@ -58,8 +58,7 @@
          
          (fact "get-service-by-name returns all the services that match the given name."
                (momanager/register-service new-microservice)
-               (count (momanager/get-service-by-name (:serviceName new-microservice))) => 1
-               (first (momanager/get-service-by-name (:serviceName new-microservice))) => 
+               (momanager/get-service-by-name (:serviceName new-microservice)) => 
                (contains (assoc basic-microservice-map :_id anything)))
          
          (fact "handle-write-result returns ok if the given map contains an error message equal to nil, 
@@ -70,7 +69,7 @@
          (fact "update-service-by-name updates the service with a given name."
                (momanager/register-service new-microservice)
                (momanager/update-service-by-name (:serviceName new-microservice) updated-microservice) => "ok"
-               (first (momanager/get-service-by-name (:serviceName updated-microservice))) => 
+               (momanager/get-service-by-name (:serviceName updated-microservice)) => 
                (contains (assoc updated-microservice-map :_id anything)))
          
          (fact "delete-service-by-name deletes a service with a given name."
