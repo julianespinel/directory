@@ -56,7 +56,7 @@
                (momanager/register-service new-microservice)
                (count (momanager/get-all-services)) => 3)
          
-         (fact "get-service-by-name returns all the services that match the given name."
+         (fact "get-service-by-name returns the service that match the given name."
                (momanager/register-service new-microservice)
                (momanager/get-service-by-name (:serviceName new-microservice)) => 
                (contains (assoc basic-microservice-map :_id anything)))
