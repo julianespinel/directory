@@ -46,8 +46,8 @@
 
        (fact "Get to /services/:serviceName returns the service with the given name."
              (api-routes {:uri (str "/services/" (:serviceName new-microservice)) :request-method :get})
-             => (contains {:status 200 :body (list new-microservice)})
-             (provided (momanager/get-service-by-name "service1") => (list new-microservice)))
+             => (contains {:status 200 :body (generate-string new-microservice)})
+             (provided (momanager/get-service-by-name "service1") => new-microservice))
 
        (fact "Put to /services/:serviceName with no body payload, returns 500."
              (api-routes {:uri (str "/services/" (:serviceName new-microservice)) 
