@@ -25,7 +25,7 @@ directoryApp.config(['$routeProvider', function($routeProvider) {
     when('/directory/microservices/:serviceName', {
 
         controller: 'microserviceController',
-        templateUrl: 'js/modules/microservice/partials/detail-and-edit-microservice.html'
+        templateUrl: 'js/modules/microservice/partials/detail-microservice.html'
     }).
 
     when('/404', {

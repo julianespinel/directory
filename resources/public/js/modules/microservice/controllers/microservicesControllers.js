@@ -1,7 +1,8 @@
 var microservicesControllers = angular.module('microservicesControllers', []);
 
-microservicesControllers.controller('microserviceController', ['$scope', '$routeParams', 'Microservice', 'MicroservicesList',
-    function($scope, $routeParams, Microservice, MicroservicesList) {
+microservicesControllers.controller('microserviceController', ['$scope', '$routeParams', '$location', 'Microservice', 
+                                    'MicroservicesList',
+    function($scope, $routeParams, $location, Microservice, MicroservicesList) {
 
     console.warn($routeParams.serviceName);
 
@@ -85,5 +86,12 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
             var errorMessage = 'El servicio no está definido';
             console.error(errorMessage);
         }
+    };
+
+    $scope.deleteMicroservice = function() {
+
+        var microservice = new Microservice();
+        microservice.$deleteMicroservice({ serviceName: $routeParams.serviceName });
+        $location.path('/directory/microservices');
     };
 }]);
