@@ -6,18 +6,18 @@
             [directory.mongomanager :as momanager])
   (:import [directory.microservice Microservice]))
 
-(def basic-microservice-map {:service-name "service1", :host "host1", :port "port1", :protocol "protocol1", :prefix "prefix1"})
-(def updated-microservice-map {:service-name "service1", :host "localhost", :port "3000", :protocol "http", :prefix "stats"})
+(def basic-microservice-map {:serviceName "service1", :host "host1", :port "port1", :protocol "protocol1", :prefix "prefix1"})
+(def updated-microservice-map {:serviceName "service1", :host "localhost", :port "3000", :protocol "http", :prefix "stats"})
 
 (def new-microservice (Microservice.
-                        (:service-name basic-microservice-map)
+                        (:serviceName basic-microservice-map)
                         (:host basic-microservice-map)
                         (:port basic-microservice-map)
                         (:protocol basic-microservice-map)
                         (:prefix basic-microservice-map)))
 
 (def updated-microservice (Microservice.
-                        (:service-name updated-microservice-map)
+                        (:serviceName updated-microservice-map)
                         (:host updated-microservice-map)
                         (:port updated-microservice-map)
                         (:protocol updated-microservice-map)
@@ -56,10 +56,9 @@
                (momanager/register-service new-microservice)
                (count (momanager/get-all-services)) => 3)
          
-         (fact "get-service-by-name returns all the services that match the given name."
+         (fact "get-service-by-name returns the service that match the given name."
                (momanager/register-service new-microservice)
-               (count (momanager/get-service-by-name (:service-name new-microservice))) => 1
-               (first (momanager/get-service-by-name (:service-name new-microservice))) => 
+               (momanager/get-service-by-name (:serviceName new-microservice)) => 
                (contains (assoc basic-microservice-map :_id anything)))
          
          (fact "handle-write-result returns ok if the given map contains an error message equal to nil, 
@@ -69,12 +68,12 @@
          
          (fact "update-service-by-name updates the service with a given name."
                (momanager/register-service new-microservice)
-               (momanager/update-service-by-name (:service-name new-microservice) updated-microservice) => "ok"
-               (first (momanager/get-service-by-name (:service-name updated-microservice))) => 
+               (momanager/update-service-by-name (:serviceName new-microservice) updated-microservice) => "ok"
+               (momanager/get-service-by-name (:serviceName updated-microservice)) => 
                (contains (assoc updated-microservice-map :_id anything)))
          
          (fact "delete-service-by-name deletes a service with a given name."
                (momanager/register-service new-microservice)
                (count (momanager/get-all-services)) => 1
-               (momanager/delete-service-by-name (:service-name new-microservice))
+               (momanager/delete-service-by-name (:serviceName new-microservice))
                (count (momanager/get-all-services)) => 0)))

@@ -6,7 +6,8 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [directory.mongomanager :as momanager]
-            [directory.translator :as translator]))
+            [directory.translator :as translator]
+            [cheshire.core :refer :all]))
 
 (def ok-status "200")
 (def not-found-error "404")
@@ -21,29 +22,30 @@
   "Checks that the parameter is not a null or empty map"
   [body] (empty? body))
 
-(defroutes app-routes
+(defroutes api-routes
   "Define the application routes"
-  (GET "/" [] (resp/redirect "/redirect-url"))
+  (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
+  (GET "/redirect" [] (resp/redirect "/redirect-url"))
   (GET "/redirect-url" [] "Hello you have been redirected.")
   
+  (GET "/services" [] (momanager/get-all-services))
   ; Http status code 400: bad request
   (POST "/services" { body :body } (if (not (body-is-null body)) (register-service body) { :status 400 }))
-  (GET "/services" [] (momanager/get-all-services))
-  (GET "/services/:service-name" [service-name] (momanager/get-service-by-name service-name))
+  (GET "/services/:serviceName" [serviceName] (generate-string (momanager/get-service-by-name serviceName)))
 
-  (PUT "/services/:service-name" { params :params, body :body }
+  (PUT "/services/:serviceName" { params :params, body :body }
        (if (not (body-is-null body))
-       (let [service-name (:service-name params) service (translator/get-microservice-from-map body)] 
-         (momanager/update-service-by-name service-name service))
+       (let [serviceName (:serviceName params) service (translator/get-microservice-from-map body)] 
+         (momanager/update-service-by-name serviceName service))
        { :status 500 }))
 
-  (DELETE "/services/:service-name" [service-name] 
-          (momanager/delete-service-by-name service-name))
-
+  (DELETE "/services/:serviceName" [serviceName] 
+          (momanager/delete-service-by-name serviceName))
+  
   (route/resources "/")
   (route/not-found not-found-error))
 
 (def app
-  (-> (handler/api app-routes)
+  (-> (handler/api api-routes)
       (wrap-json-body)
       (wrap-json-response)))

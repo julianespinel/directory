@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="directoryApp">
+<head>
+  <meta charset="utf-8">
+  <title>Directory</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <ul class="menu">
+    <li><a href="#/directory">home</a></li>
+    <li><a href="#/directory/microservices">microservices</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
+  <script src="js/modules/microservice/services/microservicesServices.js"></script>
+
+</body>
+</html>

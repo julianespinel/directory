@@ -25,7 +25,7 @@
 
 (defn get-service-by-name 
   "Return a service with the given name."
-  [service-name] (mc/find-maps "services" { :service-name service-name }))
+  [serviceName] (mc/find-one-as-map "services" { :serviceName serviceName }))
 
 (defn handle-write-result
   "Replaces the default mongodb write result for a more meaningful answer."
@@ -33,8 +33,8 @@
 
 (defn update-service-by-name 
   "Replaces the service with the given name, for the second argument (a microservice)."
-  [service-name service] (handle-write-result (mc/update "services" { :service-name service-name } service)))
+  [serviceName service] (handle-write-result (mc/update "services" { :serviceName serviceName } service)))
 
 (defn delete-service-by-name 
   "Delete the service with the given name."
-  [service-name] (handle-write-result (mc/remove "services" { :service-name service-name })))
+  [serviceName] (handle-write-result (mc/remove "services" { :serviceName serviceName })))

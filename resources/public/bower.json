@@ -1,0 +1,10 @@
+{
+  "name": "Directory",
+
+  "devDependencies": {
+
+      "angular" : "latest",
+      "angular-route" : "latest",
+      "angular-resource": "latest"
+  }
+}
