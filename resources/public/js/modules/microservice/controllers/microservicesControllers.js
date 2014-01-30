@@ -4,94 +4,61 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
                                     'MicroservicesList',
     function($scope, $routeParams, $location, Microservice, MicroservicesList) {
 
-    console.warn($routeParams.serviceName);
+        function cleanService() {
+            $scope.service = { serviceName: ' ', host: ' ', port: ' ', protocol: ' ', prefix: ' ' };
+        };
 
-    $scope.service = {};
-    $scope.servicesList = MicroservicesList.getAllMicroservices();
+        function goToDirectories() {
+            $location.path('/directory/microservices');
+        };
 
-    var getServiceByNameFromList = function(serviceName, servicesList) {
+        $scope.service = {};
+        $scope.servicesList = MicroservicesList.getAllMicroservices();
 
-        console.debug('************* 1');
-        console.debug(serviceName);
-        console.debug(servicesList);
+        if ($routeParams.serviceName) {
+            $scope.service = Microservice.getSpecificMicroservice({ serviceName: $routeParams.serviceName });
+        }
 
-        var answer = {};
-        var found = false;
+        $scope.createMicroservice = function() {
+            
+            var serviceWithData = $scope.service;
 
-        console.debug('********** 2');
-        console.debug(servicesList.length);
+            if (serviceWithData) {
 
-        for (var i = 0; i < servicesList.length && !found; i++) {
+                var microservice = new Microservice(serviceWithData);
 
-            var item = servicesList[i];
+                microservice.$createMicroservice();
+                $scope.servicesList.push(microservice);
+                cleanService();   
 
-            console.debug('in');
-            console.debug(item);
+            } else {
 
-            if (serviceName == item.serviceName) {
-                found = true;
-                answer = item;
+                var errorMessage = 'El servicio no está definido';
+                console.error(errorMessage);
             }
-        }
+        };
 
-        return item;
-    };
-
-    if ($routeParams.serviceName) {
-
-        // $scope.service = getServiceByNameFromList($routeParams.serviceName, $scope.servicesList);
-        var microseriveSample = new Microservice();
-        $scope.service = microseriveSample.$getSpecificMicroservice({ serviceName: $routeParams.serviceName });
-        console.debug($scope.service);
-    }
-
-    $scope.createMicroservice = function() {
-        
-        var serviceWithData = $scope.service;
-
-        if (serviceWithData) {
-
-            var microservice = new Microservice(serviceWithData);
+        $scope.editMicroservice = function() {
             
-            console.debug(microservice);
+            var serviceWithData = $scope.service;
 
-            microservice.$createMicroservice();
-            $scope.servicesList.push(microservice);
-            $scope.service = {};
+            if (serviceWithData) {
 
-            console.debug($scope.servicesList);
+                var microservice = new Microservice(serviceWithData);
+                microservice.$editMicroservice({ serviceName: $routeParams.serviceName });
+                goToDirectories();
 
-        } else {
+            } else {
 
-            var errorMessage = 'El servicio no está definido';
-            console.error(errorMessage);
-        }
-    };
+                var errorMessage = 'El servicio no está definido';
+                console.error(errorMessage);
+            }
+        };
 
-    $scope.editMicroservice = function() {
-        
-        var serviceWithData = $scope.service;
+        $scope.deleteMicroservice = function() {
 
-        if (serviceWithData) {
-
-            var microservice = new Microservice(serviceWithData);
-            
-            console.debug($routeParams.serviceName);
-            console.debug(microservice);
-
-            microservice.$editMicroservice({ serviceName: $routeParams.serviceName });
-
-        } else {
-
-            var errorMessage = 'El servicio no está definido';
-            console.error(errorMessage);
-        }
-    };
-
-    $scope.deleteMicroservice = function() {
-
-        var microservice = new Microservice();
-        microservice.$deleteMicroservice({ serviceName: $routeParams.serviceName });
-        $location.path('/directory/microservices');
-    };
+            var microservice = new Microservice();
+            microservice.$deleteMicroservice({ serviceName: $routeParams.serviceName });
+            goToDirectories();
+        };
 }]);
