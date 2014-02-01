@@ -17,7 +17,10 @@
 
 (defn register-service 
   "Register a new service into mongo." 
-  [service] (mc/insert-and-return "services" service))
+  [service] (let [serviceName (:serviceName service)]
+              (if-not (mc/any? "services" { :serviceName serviceName })
+                (mc/insert-and-return "services" service)
+                (str "The microservice with name " serviceName " already exists."))))
 
 (defn get-all-services 
   "Returns all the services stored in mongo as clojure maps."
@@ -29,7 +32,7 @@
 
 (defn handle-write-result
   "Replaces the default mongodb write result for a more meaningful answer."
-  [write-result] (if (not (= (:err write-result) nil)) "error" "ok"))
+  [write-result] (if-not (= (:err write-result) nil) "error" "ok"))
 
 (defn update-service-by-name 
   "Replaces the service with the given name, for the second argument (a microservice)."

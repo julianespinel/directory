@@ -48,12 +48,13 @@
 
          (fact "register-service registers a new microservice into the database."
                ; Add the _id field that mongo generates.
-               (momanager/register-service new-microservice) => (contains (assoc basic-microservice-map :_id anything)))
+               (momanager/register-service new-microservice) => (contains (assoc basic-microservice-map :_id anything))
+               (momanager/register-service new-microservice) => (contains "already exists."))
 
          (fact "get-all-services returns all the services registered into the database."
-               (momanager/register-service new-microservice)
-               (momanager/register-service new-microservice)
-               (momanager/register-service new-microservice)
+               (momanager/register-service (assoc new-microservice :serviceName "sn1"))
+               (momanager/register-service (assoc new-microservice :serviceName "sn2"))
+               (momanager/register-service (assoc new-microservice :serviceName "sn3"))
                (count (momanager/get-all-services)) => 3)
          
          (fact "get-service-by-name returns the service that match the given name."
