@@ -5,11 +5,73 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
     function($scope, $routeParams, $location, Microservice, MicroservicesList) {
 
         function cleanService() {
-            $scope.service = { serviceName: ' ', host: ' ', port: ' ', protocol: ' ', prefix: ' ' };
+            $scope.service = {};
         };
 
         function goToDirectories() {
             $location.path('/directory/microservices');
+        };
+
+        $scope.validator = { 
+            errorMessage: '',
+            isNotAValidService: true
+        };
+
+        function validateServiceDoesNotExistAtTheBackEnd(microservice, success) {
+
+            // Check if the service name is already registered in the back end.
+            var checkIfServiceExists = function(result) {
+
+                // If the name is registered into the db.
+                if (result.serviceName) {
+                    errorMessage = 'The service with name ' + serviceName + ' already exists.';
+                }
+
+                success(errorMessage);
+            };
+
+            var errorMessage = '';
+            var serviceName = microservice.serviceName;
+            var serviceExists = Microservice.getSpecificMicroservice({ serviceName: serviceName });
+            serviceExists.$promise.then(checkIfServiceExists);
+        };
+
+        $scope.verifyServiceFields = function() {
+
+            var errorMessage = '';
+            var microservice  = $scope.service;
+
+            // If there is no error with the serviceName, then check the other fields.
+            if (!microservice.serviceName) {
+
+                errorMessage = 'The service name is required.';
+
+            } else if (!microservice.host) {
+
+                errorMessage = 'The service host is required.';
+
+            } else if (!microservice.port) {
+
+                errorMessage = 'The service port is required.';
+
+            } else if (!microservice.protocol) {
+
+                errorMessage = 'The service protocol is required.';
+
+            } else if (!microservice.prefix) {
+
+                errorMessage = 'The service prefix is required.';
+            }
+
+            if (!errorMessage) {
+
+                $scope.validator.isNotAValidService = false;
+
+            } else {
+
+                $scope.validator.isNotAValidService = true;
+                $scope.validator.errorMessage = errorMessage;
+            }
         };
 
         $scope.service = {};
@@ -25,11 +87,27 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
 
             if (serviceWithData) {
 
-                var microservice = new Microservice(serviceWithData);
+                // Check the service fields are valid.
+                $scope.verifyServiceFields();
 
-                microservice.$createMicroservice();
-                $scope.servicesList.push(microservice);
-                cleanService();   
+                var success = function(errorMessage) {
+
+                    if (!errorMessage) {
+
+                        var microservice = new Microservice(serviceWithData);
+                        microservice.$createMicroservice();
+                        $scope.servicesList.push(microservice);
+                        cleanService();
+
+                    } else {
+
+                        $scope.validator.errorMessage = errorMessage;
+                        $scope.validator.isNotAValidService = true;
+                    }
+                };
+
+                // validateService(serviceWithData);
+                validateServiceDoesNotExistAtTheBackEnd(serviceWithData, success);
 
             } else {
 

@@ -48,24 +48,35 @@
 
         <div class="horizontal-div">
 
-            <form class="regular">
+            <form class="regular" name="createForm" novalidate>
+
+                <!-- Check the ng-disabled and ng-show directive, validate the whole service in the controller -->
+
                 <label class="regular" for="serviceName">Service name</label>
-                <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" value="{{ service.serviceName }}" required />
+                <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" 
+                    ng-change="verifyServiceFields()" value="{{ service.serviceName }}" required />
 
                 <label class="regular" for="host">Host</label>
-                <input class="regular" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
+                <input class="regular" id="host" type="text" ng-model="service.host" ng-change="verifyServiceFields()"
+                    value="{{ service.host }}" required />
 
                 <label class="regular" for="port">Port</label>
-                <input class="regular" id="port" type="text" ng-model="service.port" value="{{ service.port }}" required />
+                <input class="regular" id="port" type="text" ng-model="service.port" ng-change="verifyServiceFields()"
+                    value="{{ service.port }}" required />
 
                 <label class="regular" for="protocol">Protocol</label>
-                <input class="regular" id="protocol" type="text" ng-model="service.protocol" value="{{ service.protocol }}" required />
+                <input class="regular" id="protocol" type="text" ng-model="service.protocol" ng-change="verifyServiceFields()"
+                    value="{{ service.protocol }}" required />
 
                 <label class="regular" for="prefix">Prefix</label>
-                <input class="regular" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+                <input class="regular" id="prefix" type="text" ng-model="service.prefix" ng-change="verifyServiceFields()"
+                    value="{{ service.prefix }}" required />
 
-                <input class="regular" type="submit" value="Create" ng-click="createMicroservice()" />
+                <input class="regular" type="submit" value="Create" ng-disabled="validator.isNotAValidService"
+                    ng-click="createMicroservice()" />
             </form>
+
+            <p ng-show="validator.isNotAValidService">{{ validator.errorMessage }}</p>
 
         </div>
 
