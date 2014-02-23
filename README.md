@@ -3,6 +3,8 @@
 Directory is a system that allow us to register new microservices of our architecture.
 This project was created in order to learn clojure and how to build a clojure web app.
 
+Current build status: [![Build Status](https://travis-ci.org/julianespinel/directory.png?branch=master)](https://travis-ci.org/julianespinel/directory)
+
 ## Prerequisites
 
 You will need [Leiningen][1] 1.7.0 or above installed.
