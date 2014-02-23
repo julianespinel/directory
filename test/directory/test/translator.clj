@@ -1,8 +1,8 @@
 (ns directory.test.translator
 
   (:use clojure.test
-        ring.mock.request  
-        directory.handler
+        ring.mock.request
+        directory.microservice
         midje.sweet)
   (:require [directory.translator :as translator])
   (:import [directory.microservice Microservice]))

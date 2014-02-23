@@ -1,6 +1,8 @@
 (ns directory.test.mongomanager
 
   (:use clojure.test
+        directory.microservice ; Do not forget to import this when need to import a defrecord. 
+                               ; See: http://clojuredocs.org/clojure_core/1.2.0/clojure.core/defrecord
         midje.sweet)
   (:require [monger.core :as monger]
             [directory.mongomanager :as momanager])
