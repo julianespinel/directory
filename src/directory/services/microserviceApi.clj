@@ -1,12 +1,10 @@
-(ns directory.handler
+(ns directory.services.microserviceApi
   "Http server handler. Define the routes and the functions that each route have to execute."
-  (:use compojure.core
-        ring.middleware.json)
+  (:use compojure.core)
   (:require [ring.util.response :as resp]
-            [compojure.handler :as handler]
             [compojure.route :as route]
-            [directory.mongomanager :as momanager]
-            [directory.translator :as translator]
+            [directory.persistence.mongomanager  :as momanager]
+            [directory.infrastructure.translator :as translator]
             [cheshire.core :refer :all]))
 
 (def ok-status "200")
@@ -44,8 +42,3 @@
   
   (route/resources "/")
   (route/not-found not-found-error))
-
-(def app
-  (-> (handler/api api-routes)
-      (wrap-json-body)
-      (wrap-json-response)))

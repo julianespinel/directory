@@ -1,7 +1,7 @@
-(ns directory.translator
+(ns directory.infrastructure.translator
   "This module provides functions to translate regular maps to well defined data structures."
-  (:require [directory.microservice])
-  (:import [directory.microservice Microservice]))
+  (:require [directory.datastructures.microservice])
+  (:import [directory.datastructures.microservice Microservice]))
 
 (defn get-microservice-from-map 
   "Gets a string map and return a Microservice. It should be a string map, not a key map." 

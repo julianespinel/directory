@@ -6,7 +6,7 @@
                  [compojure "1.1.6"]
                  [com.novemberain/monger "1.7.0"]]
   :plugins [[lein-ring "0.8.8"]]
-  :ring {:handler directory.handler/app
+  :ring {:handler directory.main/app
          :stacktraces? true
          :auto-reload true
          :auto-refresh? true}
