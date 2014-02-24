@@ -12,19 +12,21 @@
  
   <header>
 
-      <div class=".col-md-3 .col-md-offset-3 navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="col-md-offset-3">
 
-          <a class="navbar-brand" href="#">Bogotá JVM Meetup</a>
+              <a class="navbar-brand" href="#">Bogotá JVM Meetup</a>
+              <ul class="menu nav navbar-nav">
+                <li><a href="#/directory">home</a></li>
+                <li><a href="#/directory/microservices">microservices</a></li>
+              </ul>
 
-          <ul class="menu nav navbar-nav">
-            <li><a href="#/directory">home</a></li>
-            <li><a href="#/directory/microservices">microservices</a></li>
-          </ul>
+          </div>
       </div>
 
   </header>
 
-  <div ng-view></div>
+  <section class="jumbotron" ng-view></section>
 
   <footer>
   </footer>
