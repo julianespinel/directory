@@ -1,11 +1,11 @@
-(ns directory.test.translator
+(ns directory.test.infrastructure.translator
 
   (:use clojure.test
         ring.mock.request
-        directory.microservice
+        directory.datastructures.microservice
         midje.sweet)
-  (:require [directory.translator :as translator])
-  (:import [directory.microservice Microservice]))
+  (:require [directory.infrastructure.translator :as translator])
+  (:import [directory.datastructures.microservice Microservice]))
 
 (def string-map {"serviceName" "service1", "host" "host1", "port" "port1", "protocol" "protocol1", "prefix" "prefix1"})
 

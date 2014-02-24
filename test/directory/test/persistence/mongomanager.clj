@@ -1,12 +1,12 @@
-(ns directory.test.mongomanager
+(ns directory.test.persistence.mongomanager
 
   (:use clojure.test
-        directory.microservice ; Do not forget to import this when need to import a defrecord. 
-                               ; See: http://clojuredocs.org/clojure_core/1.2.0/clojure.core/defrecord
+        directory.datastructures.microservice ; Do not forget to import this when need to import a defrecord. 
+                                              ; See: http://clojuredocs.org/clojure_core/1.2.0/clojure.core/defrecord
         midje.sweet)
   (:require [monger.core :as monger]
-            [directory.mongomanager :as momanager])
-  (:import [directory.microservice Microservice]))
+            [directory.persistence.mongomanager :as momanager])
+  (:import [directory.datastructures.microservice Microservice]))
 
 (def basic-microservice-map {:serviceName "service1", :host "host1", :port "port1", :protocol "protocol1", :prefix "prefix1"})
 (def updated-microservice-map {:serviceName "service1", :host "localhost", :port "3000", :protocol "http", :prefix "stats"})

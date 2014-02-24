@@ -1,11 +1,11 @@
-(ns directory.test.handler
+(ns directory.test.services.microserviceApi
 
   (:use clojure.test
         ring.mock.request  
-        directory.handler
+        directory.services.microserviceApi
         midje.sweet)
-  (:require [directory.mongomanager :as momanager]
-            [directory.translator :as translator]
+  (:require [directory.persistence.mongomanager :as momanager]
+            [directory.infrastructure.translator :as translator]
             [cheshire.core :refer :all]))
 
 (def redirection-message "Hello you have been redirected.")

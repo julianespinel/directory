@@ -1,4 +1,4 @@
-(ns directory.mongomanager
+(ns directory.persistence.mongomanager
   "This module is responsible of providing the functions needed to communicate with mongodb."
   (:require [monger.core :as monger]
             [monger.collection :as mc] 
