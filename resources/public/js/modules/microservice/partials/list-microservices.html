@@ -72,7 +72,7 @@
                 <input class="regular" id="prefix" type="text" ng-model="service.prefix" ng-change="verifyServiceFields()"
                     value="{{ service.prefix }}" required />
 
-                <input class="regular" type="submit" value="Create" ng-disabled="validator.isNotAValidService"
+                <input class="btn btn-success" type="submit" value="Create" ng-disabled="validator.isNotAValidService"
                     ng-click="createMicroservice()" />
             </form>
 
