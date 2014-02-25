@@ -1,46 +1,50 @@
 <!doctype html>
 <html lang="en" ng-app="directoryApp">
 <head>
-  <meta charset="utf-8">
-  <title>Directory</title>
+<meta charset="utf-8">
+<title>Directory</title>
 
-  <!-- Bootstrap -->
-  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/directory.css"/>
+<!-- Bootstrap -->
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/directory.css"/>
 </head>
 <body>
- 
-  <header>
 
-      <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="col-md-offset-3">
+<div class="container">
 
-              <a class="navbar-brand" href="#">Bogotá JVM Meetup</a>
-              <ul class="menu nav navbar-nav">
-                <li><a href="#/directory">home</a></li>
-                <li><a href="#/directory/microservices">microservices</a></li>
-              </ul>
+    <header>
 
-          </div>
-      </div>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="col-md-offset-3">
 
-  </header>
+                <a class="navbar-brand" href="http://www.meetup.com/Bogota-JVM-Meetup" target="_blank">Bogotá JVM Meetup</a>
+                <ul class="menu nav navbar-nav">
+                    <li><a href="#/directory">home</a></li>
+                    <li><a href="#/directory/microservices">microservices</a></li>
+                </ul>
 
-  <section class="jumbotron" ng-view></section>
+            </div>
+        </div>
 
-  <footer>
-  </footer>
+    </header>
 
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <section class="jumbotron main" ng-view></section>
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <footer>
+    </footer>
 
-  <script src="js/app.js"></script>
-  <script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
-  <script src="js/modules/microservice/services/microservicesServices.js"></script>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
+<script src="js/modules/microservice/services/microservicesServices.js"></script>
 
 </body>
 </html>

@@ -1,1 +1,25 @@
+.main {
 
+    padding-top: 70px;
+}
+
+h3 {
+
+    font-style: italic;
+}
+
+.inline {
+
+    display: inline-block;
+}
+
+.content-div {
+
+    padding-top: 200px;
+}
+
+.next-row {
+
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
