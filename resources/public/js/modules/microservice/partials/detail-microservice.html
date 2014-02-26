@@ -1,19 +1,80 @@
-<form class="regular">
-    <label class="regular" for="serviceName">Service name</label>
-    <input class="regular" id="serviceName" type="text" ng-model="service.serviceName" value="{{ service.serviceName }}" required />
+<div class="jumbotron">
 
-    <label class="regular" for="host">Host</label>
-    <input class="regular" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
+    <div class="row">
 
-    <label class="regular" for="port">Port</label>
-    <input class="regular" id="port" type="text" ng-model="service.port" value="{{ service.port }}" required />
+        <div class="definition inline col-md-offset-1 col-md-4">
+            <h1>Edit</h1>
+            <h2>Ed·it</h2>
+            <h3>verb</h3>
+            <p>
+            Remove unnecessary or inappropriate words, sounds, or scenes from a text, movie, or radio or television program.
+            </p>
+        </div>
 
-    <label class="regular" for="protocol">Protocol</label>
-    <input class="regular" id="protocol" type="text" ng-model="service.protocol" value="{{ service.protocol }}" required />
+        <div class="definition inline col-md-offset-1 col-md-6">
 
-    <label class="regular" for="prefix">Prefix</label>
-    <input class="regular" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+            <h1>Delete</h1>
+            <h2>De·lete</h2>
+            <h3>verb</h3>
+            <p>
+            To remove (something, such as words, pictures, or computer files) from a document, recording, computer, etc.
+            </p>
+        </div>
 
-    <input class="regular" type="submit" value="Edit" ng-click="editMicroservice()" />
-    <input class="regular" type="submit" value="Delete" ng-click="deleteMicroservice()" />
-</form>
+    </div>
+
+</div>
+
+<div class="second-level-content row">
+
+    <div class="col-md-offset-1 col-md-5">
+
+        <h1>Anatomy of a micro service</h1>
+        <br/>
+        <p id="edit-delete-chat">
+        Each micro service should contain enough information in order to be located on internet. To locate something 
+        on the web, you need at least the following parameters: an ip address, a port number and a protocol. 
+        <br/><br/>
+        We have add some more in order to be more descriptive.
+        </p>
+
+    </div>
+
+    <div class="col-md-offset-1 col-md-4">
+
+    <form role="form">
+
+        <div class="form-group">
+            <label class="regular" for="serviceName">Service name</label>
+            <input class="form-control" id="serviceName" type="text" ng-model="service.serviceName" 
+            value="{{ service.serviceName }}" required />
+        </div>
+
+        <div class="form-group">
+            <label class="regular" for="host">Host</label>
+            <input class="form-control" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
+        </div>
+
+        <div class="form-group">
+            <label class="regular" for="port">Port</label>
+            <input class="form-control" id="port" type="text" ng-model="service.port" value="{{ service.port }}" required />
+        </div>
+        
+        <div class="form-group">
+            <label class="regular" for="protocol">Protocol</label>
+            <input class="form-control" id="protocol" type="text" ng-model="service.protocol" 
+                value="{{ service.protocol }}" required />
+        </div>
+
+        <div class="form-group">
+            <label class="regular" for="prefix">Prefix</label>
+            <input class="form-control" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+        </div>
+
+        <input class="btn btn-warning col-md-offset-2 col-md-3" type="submit" value="Edit" ng-click="editMicroservice()" />
+        <input class="btn btn-danger col-md-offset-2 col-md-3" type="submit" value="Delete" ng-click="deleteMicroservice()" />
+    </form>
+
+    <div>
+
+</diV>

@@ -1,0 +1,36 @@
+.main {
+
+    padding-bottom: 50px;
+}
+
+h3 {
+
+    font-style: italic;
+}
+
+.inline {
+
+    display: inline-block;
+}
+
+.next-row {
+
+    padding-bottom: 30px;
+}
+
+table {
+
+    font-size: 18px;
+}
+
+.second-level-content {
+
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+#edit-delete-chat {
+
+    font-size: 20px;
+    line-height: 200%;
+}

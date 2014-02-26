@@ -1,26 +1,56 @@
 <!doctype html>
 <html lang="en" ng-app="directoryApp">
 <head>
-  <meta charset="utf-8">
-  <title>Directory</title>
-  <link rel="stylesheet" href="css/style.css"/>
+<meta charset="utf-8">
+<title>Directory</title>
+
+<!-- Bootstrap -->
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/directory.css"/>
 </head>
 <body>
 
-  <ul class="menu">
-    <li><a href="#/directory">home</a></li>
-    <li><a href="#/directory/microservices">microservices</a></li>
-  </ul>
+<header class="page-header">
 
-  <div ng-view></div>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" target="_blank" href="http://www.meetup.com/Bogota-JVM-Meetup">Bogotá JVM Meetup</a>
+            </div>
+            <div class="navbar-collapse collapse" style="height: 1px;">
+                <ul class="nav navbar-nav">
+                    <li class="{true: 'active'}"><a href="#/directory">Home</a></li>
+                    <li><a href="#/directory/microservices">Microservices</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
+</header>
 
-  <script src="js/app.js"></script>
-  <script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
-  <script src="js/modules/microservice/services/microservicesServices.js"></script>
+<div class="container">
+    <section class="main" ng-view></section>
+</div>
+
+<footer>
+</footer>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/modules/microservice/controllers/microservicesControllers.js"></script>
+<script src="js/modules/microservice/services/microservicesServices.js"></script>
 
 </body>
 </html>
