@@ -47,7 +47,7 @@
         <div class="form-group">
             <label class="regular" for="serviceName">Service name</label>
             <input class="form-control" id="serviceName" type="text" ng-model="service.serviceName" 
-            value="{{ service.serviceName }}" required />
+                ng-change="verifyServiceFields()" value="{{ service.serviceName }}" required />
         </div>
 
         <div class="form-group">
@@ -69,6 +69,10 @@
         <div class="form-group">
             <label class="regular" for="prefix">Prefix</label>
             <input class="form-control" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+        </div>
+
+        <div class="form-group" ng-show="validator.isNotAValidService">
+            <p class="alert alert-danger">{{ validator.errorMessage }}</p>
         </div>
 
         <input class="btn btn-warning col-md-offset-2 col-md-3" type="submit" value="Edit" ng-click="editMicroservice()" />

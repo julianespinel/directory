@@ -87,38 +87,40 @@
                 <div class="form-group">
                     <label class="regular" for="serviceName">Service name</label>
                     <input class="form-control" id="serviceName" type="text" ng-model="service.serviceName" 
-                    ng-change="verifyServiceFields()" value="{{ service.serviceName }}" required />
+                        ng-change="verifyServiceFields()" value="{{ service.serviceName }}" required />
                 </div>
 
                 <div class="form-group">
                     <label class="regular" for="host">Host</label>
                     <input class="form-control" id="host" type="text" ng-model="service.host" ng-change="verifyServiceFields()"
-                    value="{{ service.host }}" required />
+                        value="{{ service.host }}" required />
                 </div>
 
                 <div class="form-group">
                     <label class="regular" for="port">Port</label>
                     <input class="form-control" id="port" type="text" ng-model="service.port" ng-change="verifyServiceFields()"
-                    value="{{ service.port }}" required />
+                        value="{{ service.port }}" required />
                 </div>
 
                 <div class="form-group">
                     <label class="regular" for="protocol">Protocol</label>
                     <input class="form-control" id="protocol" type="text" ng-model="service.protocol" 
-                    ng-change="verifyServiceFields()" value="{{ service.protocol }}" required />
+                        ng-change="verifyServiceFields()" value="{{ service.protocol }}" required />
                 </div>
 
                 <div class="form-group">
                     <label class="regular" for="prefix">Prefix</label>
                     <input class="form-control" id="prefix" type="text" ng-model="service.prefix" 
-                    ng-change="verifyServiceFields()" value="{{ service.prefix }}" required />
+                        ng-change="verifyServiceFields()" value="{{ service.prefix }}" required />
                 </div>
 
-                <input class="btn btn-success col-md-offset-4 col-md-4" type="submit" value="Create" ng-disabled="validator.isNotAValidService"
-                    ng-click="createMicroservice()" />
-            </form>
+                <div class="form-group" ng-show="validator.isNotAValidService">
+                    <p class="alert alert-danger">{{ validator.errorMessage }}</p>
+                </div>
 
-            <p ng-show="validator.isNotAValidService">{{ validator.errorMessage }}</p>
+                <input class="btn btn-success col-md-offset-4 col-md-4" type="submit" value="Create"
+                    ng-disabled="validator.isNotAValidService" ng-click="createMicroservice()" />
+            </form>
 
         </div>
 
