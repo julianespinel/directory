@@ -1,6 +1,6 @@
 .main {
 
-    padding-top: 70px;
+    padding-bottom: 50px;
 }
 
 h3 {
@@ -13,13 +13,24 @@ h3 {
     display: inline-block;
 }
 
-.content-div {
-
-    padding-top: 200px;
-}
-
 .next-row {
 
-    padding-top: 50px;
     padding-bottom: 30px;
+}
+
+table {
+
+    font-size: 18px;
+}
+
+.second-level-content {
+
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+#edit-delete-chat {
+
+    font-size: 20px;
+    line-height: 200%;
 }
