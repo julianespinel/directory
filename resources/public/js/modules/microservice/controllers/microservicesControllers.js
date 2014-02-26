@@ -14,7 +14,7 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
 
         $scope.validator = { 
             errorMessage: '',
-            isNotAValidService: true
+            isNotAValidService: false
         };
 
         function validateServiceDoesNotExistAtTheBackEnd(microservice, success) {
@@ -106,7 +106,6 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
                     }
                 };
 
-                // validateService(serviceWithData);
                 validateServiceDoesNotExistAtTheBackEnd(serviceWithData, success);
 
             } else {
@@ -121,6 +120,9 @@ microservicesControllers.controller('microserviceController', ['$scope', '$route
             var serviceWithData = $scope.service;
 
             if (serviceWithData) {
+
+                // Check the service fields are valid.
+                $scope.verifyServiceFields();
 
                 var microservice = new Microservice(serviceWithData);
                 microservice.$editMicroservice({ serviceName: $routeParams.serviceName });

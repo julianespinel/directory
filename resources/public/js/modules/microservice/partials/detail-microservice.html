@@ -52,31 +52,36 @@
 
         <div class="form-group">
             <label class="regular" for="host">Host</label>
-            <input class="form-control" id="host" type="text" ng-model="service.host" value="{{ service.host }}" required />
+            <input class="form-control" id="host" type="text" ng-model="service.host" 
+                ng-change="verifyServiceFields()" value="{{ service.host }}" required />
         </div>
 
         <div class="form-group">
             <label class="regular" for="port">Port</label>
-            <input class="form-control" id="port" type="text" ng-model="service.port" value="{{ service.port }}" required />
+            <input class="form-control" id="port" type="text" ng-model="service.port" 
+                ng-change="verifyServiceFields()" value="{{ service.port }}" required />
         </div>
         
         <div class="form-group">
             <label class="regular" for="protocol">Protocol</label>
             <input class="form-control" id="protocol" type="text" ng-model="service.protocol" 
-                value="{{ service.protocol }}" required />
+                ng-change="verifyServiceFields()" value="{{ service.protocol }}" required />
         </div>
 
         <div class="form-group">
             <label class="regular" for="prefix">Prefix</label>
-            <input class="form-control" id="prefix" type="text" ng-model="service.prefix" value="{{ service.prefix }}" required />
+            <input class="form-control" id="prefix" type="text" ng-model="service.prefix" 
+                ng-change="verifyServiceFields()" value="{{ service.prefix }}" required />
         </div>
 
         <div class="form-group" ng-show="validator.isNotAValidService">
             <p class="alert alert-danger">{{ validator.errorMessage }}</p>
         </div>
 
-        <input class="btn btn-warning col-md-offset-2 col-md-3" type="submit" value="Edit" ng-click="editMicroservice()" />
-        <input class="btn btn-danger col-md-offset-2 col-md-3" type="submit" value="Delete" ng-click="deleteMicroservice()" />
+        <input class="btn btn-warning col-md-offset-2 col-md-3" type="submit" value="Edit" 
+            ng-disabled="validator.isNotAValidService" ng-click="editMicroservice()" />
+        <input class="btn btn-danger col-md-offset-2 col-md-3" type="submit" value="Delete" 
+            ng-disabled="validator.isNotAValidService" ng-click="deleteMicroservice()" />
     </form>
 
     <div>
