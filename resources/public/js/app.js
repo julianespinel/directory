@@ -1,40 +1,17 @@
-'use strict';
+define(['angular', 'angularRoute', 'angularResource', 'modules/microservice/services/microservicesServices',
+       'modules/microservice/controllers/microservicesControllers'], 
 
-/* App Module */
+       function(angular, microservicesServices, microservicesControllers) {
 
-var directoryApp = angular.module('directoryApp', ['ngRoute', 'microservicesServices', 'microservicesControllers']);
+           'use strict';
 
-directoryApp.config(['$routeProvider', function($routeProvider) {
+           return angular.module('directoryApp', [
 
-    $routeProvider.when('/', {
+               'ngRoute',
+               'ngResource',
 
-        redirectTo: '/directory'
-    })
+               'microservicesServices',
+               'microservicesControllers'
+           ]);
 
-    .when('/directory', {
-
-        templateUrl: 'js/modules/infrastructure/partials/index.html'
-    }).
-    
-    when('/directory/microservices', {
-
-        controller: 'microserviceController',
-        templateUrl: 'js/modules/microservice/partials/list-microservices.html'
-    }).
-
-    when('/directory/microservices/:serviceName', {
-
-        controller: 'microserviceController',
-        templateUrl: 'js/modules/microservice/partials/detail-microservice.html'
-    }).
-
-    when('/404', {
-
-        templateUrl: 'js/modules/infrastructure/partials/404-error.html'
-    }).
-
-    otherwise({
-
-        redirectTo: '/404'
-    });
-}]);
+       });
