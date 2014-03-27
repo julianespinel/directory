@@ -3,6 +3,8 @@
 
   "devDependencies": {
 
+      "requirejs" : "2.1.11",
+
       "angular" : "latest",
       "angular-route" : "latest",
       "angular-resource": "latest",
