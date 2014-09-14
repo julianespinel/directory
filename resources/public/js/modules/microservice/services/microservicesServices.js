@@ -6,7 +6,7 @@ define(['angular'], function(angular) {
 
     microservicesServices.factory('Microservice', ['$resource', function($resource) {
 
-        var specificMicroserviceUrl = 'http://localhost:3000/services/:serviceName';
+        var specificMicroserviceUrl = 'http://localhost:4001/services/:serviceName';
         var microservicesUrl = 'http://localhost:4001/services';
 
         var url = '';
