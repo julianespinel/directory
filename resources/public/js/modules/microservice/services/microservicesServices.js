@@ -25,7 +25,7 @@ define(['angular'], function(angular) {
 
     microservicesServices.factory('MicroservicesList', ['$resource', function($resource) {
 
-        var url = 'http://localhost:3000/services';
+        var url = 'http://localhost:4001/services';
         var paramDefaults = '';
 
         var actions = {
