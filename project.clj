@@ -1,6 +1,6 @@
 (defproject directory "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Directory is a system that allow us to register new microservices of our architecture."
+  :url "https://github.com/julianespinel/directory"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [ring/ring-json "0.2.0"]
                  [ring/ring-jetty-adapter "1.2.2"]
