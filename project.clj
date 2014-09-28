@@ -3,7 +3,7 @@
   :url "https://github.com/julianespinel/directory"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [ring/ring-json "0.2.0"]
-                 [ring/ring-jetty-adapter "1.2.2"]
+                 [http-kit "2.1.18"]
                  [compojure "1.1.6"]
                  [com.novemberain/monger "1.7.0"]]
   :plugins [[lein-ring "0.8.8"]]
