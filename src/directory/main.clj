@@ -12,7 +12,7 @@
       (wrap-json-response)))
 
 (defn start-server []
-  (http-kit/run-server app {:port 4001 :join? false}))
+  (http-kit/run-server app {:port 4001}))
 
 (defn -main [& args] 
   (start-server))
